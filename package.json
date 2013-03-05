@@ -1,0 +1,30 @@
+{
+  "name": "rekuire",
+  "version": "0.0.1",
+  "description": "'rekuire' is basically node's 'require' without the relative paths",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/nadav-dav/rekuire.git"
+  },
+  "main": "./lib/main.js",
+  "scripts": {
+    "test": "jasmine-node ./test/"
+  },
+  "dependencies" : {
+      "underscore" : "*",
+      "fs-extra" : "*",
+      "jasmine-node" : "*"
+  },
+  "keywords": [
+    "require",
+    "rekuire ",
+    "relative",
+    "path",
+    "node"
+  ],
+  "author": {
+      "name":"Nadav Dav",
+      "email": "nadavl@wix.com"
+  },
+  "license": "BSD"
+}
