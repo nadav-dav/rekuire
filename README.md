@@ -5,7 +5,7 @@ Rekuire
 installation
 -------------
 to install, type
->```npm install req```
+>```npm install rekuire```
 
 
 so how to use it?
