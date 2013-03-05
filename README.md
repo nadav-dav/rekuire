@@ -1,21 +1,22 @@
 Rekuire
 =========
-> 'rekuire' is basically node's 'require' without the relative paths
+'rekuire' is basically node's 'require' without the relative paths
 
 installation
 -------------
 to install, type
->```npm install req
-```
+>```npm install req```
 
 
 so how to use it?
 -----------------
-> instead of doing this:
+> instead of doing this: 
+
 > ```var MyModule = require('../../../MyModule.js');``` *<-- yuck!*
+
 > &nbsp;
-> why not do this:
-> ```var rekuire = require('rekuire');```
+> why not do this:<br/>
+> ```var rekuire = require('rekuire');```<br/>
 > ```var MyModule = rekuire('MyModule.js');```
 
 
