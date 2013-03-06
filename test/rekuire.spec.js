@@ -31,6 +31,14 @@ describe("Testing 'rekuire'",function(){
             });
         });
 
+        it("should add '.js' to the module name if not present",function(){
+            runs(function(){
+                var rekuire = require('rekuire');
+                var imported = rekuire('someModule');
+                expect(imported).toBe("some module");
+            });
+        });
+
         it("should retrieve it according to relative path",function(){
             runs(function(){
                 var rekuire = require('rekuire');
@@ -70,5 +78,5 @@ function copyReqToNodeModules(callback){
 }
 
 function clearNodeModules(){
-    fs.remove( base + "node_modules/rekuire");
+    fs.removeSync( base + "node_modules/rekuire");
 }
