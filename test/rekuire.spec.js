@@ -62,6 +62,19 @@ describe("Testing 'rekuire'",function(){
                 expect(fse).not.toBeNull();
             })
         });
+
+        it("should throw an error if not found", function(){
+            runs(function(){
+                var rekuire = require('rekuire');
+                var error = null;
+                try{
+                    rekuire('no-such-package');
+                }catch(e){
+                    error = e;
+                }
+                expect(error).not.toBeNull();
+            });
+        })
     });
 });
 
