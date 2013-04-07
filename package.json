@@ -11,18 +11,20 @@
     "test": "jasmine-node ./test/"
   },
   "dependencies" : {
-      "underscore" : "*",
-      "fs-extra" : "*",
-      "jasmine-node" : "*"
+      "underscore" : "*"
   },
-  "keywords": [
+    "devDependencies" : {
+        "fs-extra" : "*",
+        "jasmine-node" : "*"
+    },
+    "keywords": [
     "require",
     "rekuire ",
     "relative",
     "path",
     "node"
   ],
-  "author": {
+    "author": {
       "name":"Nadav Dav",
       "email": "nadavik@gmail.com"
   },
