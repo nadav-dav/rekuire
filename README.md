@@ -16,12 +16,28 @@ so how to use it?
 
 > &nbsp;
 > why not do this:<br/>
-> ```var rekuire = require('rekuire');```<br/>
-> ```var MyModule = rekuire('MyModule.js');```
+> ```var rek = require('rekuire');```<br/>
+> ```var MyModule = rek('MyModule.js');```
 
+> if you want to resolve only the file location, for example, if you want to use [proxyrequire][proxyrequire].<br/>
+> use: <br/>
+> ```var mypath = rekuire({localPath:'MyModule'});```<br/>
+> ```// mypath = 'lib/classes/MyModule.js' ```
+
+- - - 
 
 what does it do?
 ----------------
 > when 'rekuire' is first loaded to the project, it scans the **.js* files,
 > then, when you need them they are right there to use!
 > no relative paths are needed! *yeahy!*
+
+- - -
+
+Development
+-------------
+> To test, run: ```npm test```
+
+
+
+[proxyrequire]:https://github.com/thlorenz/proxyquire

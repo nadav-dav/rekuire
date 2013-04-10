@@ -1,6 +1,7 @@
 "use strict";
 
-var fs = require('fs-extra');
+var fs = require('fs-extra'),
+    path = require('path');
 
 var base = __dirname + "/../";
 
@@ -75,6 +76,28 @@ describe("Testing 'rekuire'",function(){
                 expect(error).not.toBeNull();
             });
         })
+    });
+    describe("when rekuiring just the local path", function(){
+        it("should return the right path", function(){
+            runs(function(){
+                var rekuire = require('rekuire');
+                var localPath = path.relative(__dirname,rekuire({localPath:'someModule.js'}));
+                expect(localPath).toBe("testResources/nestedPackage/someModule.js");
+            });
+        });
+
+        it("should throw an error if couldn't find", function(){
+            runs(function(){
+                var rekuire = require('rekuire');
+                var error = null;
+                try{
+                    rekuire({localPath:'no-such-package'});
+                }catch(e){
+                    error = e;
+                }
+                expect(error).not.toBeNull();
+            });
+        });
     });
 });
 
