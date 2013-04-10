@@ -1,6 +1,6 @@
 {
   "name": "rekuire",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "'rekuire' is basically node's 'require' without the relative paths",
   "repository": {
     "type": "git",
@@ -8,7 +8,7 @@
   },
   "main": "./lib/main.js",
   "scripts": {
-    "test": "jasmine-node ./test/"
+    "test": "npm install && jasmine-node ./test/"
   },
   "dependencies" : {
       "underscore" : "*"
