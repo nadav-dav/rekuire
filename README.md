@@ -19,9 +19,9 @@ so how to use it?
 > ```var rek = require('rekuire');```<br/>
 > ```var MyModule = rek('MyModule.js');```
 
-> if you want to resolve only the file location, for example, if you want to use [proxyrequire][proxyrequire].<br/>
+> if you want to resolve only the file location, for example, if you want to use [proxyquire][proxyquire].<br/>
 > use: <br/>
-> ```var mypath = rekuire({localPath:'MyModule'});```<br/>
+> ```var mypath = rekuire().path('MyModule');```<br/>
 > ```// mypath = 'lib/classes/MyModule.js' ```
 
 - - - 
@@ -40,4 +40,4 @@ Development
 
 
 
-[proxyrequire]:https://github.com/thlorenz/proxyquire
+[proxyquire]:https://github.com/thlorenz/proxyquire

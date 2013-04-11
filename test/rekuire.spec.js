@@ -1,16 +1,18 @@
 "use strict";
 
 var fs = require('fs-extra'),
-    path = require('path');
+    path = require('path'),
+    proxyquire = require('proxyquire');
 
 var base = __dirname + "/../";
+
 
 describe("Testing 'rekuire'",function(){
 
     beforeEach(function(){
         var setupDone = false;
         runs( function () {
-            copyReqToNodeModules(function(){
+            copyRekToNodeModules(function(){
                 setupDone = true;
             });
         });
@@ -81,7 +83,7 @@ describe("Testing 'rekuire'",function(){
         it("should return the right path", function(){
             runs(function(){
                 var rekuire = require('rekuire');
-                var localPath = path.relative(__dirname,rekuire({localPath:'someModule.js'}));
+                var localPath = path.relative(__dirname,rekuire().path('someModule.js'));
                 expect(localPath).toBe("testResources/nestedPackage/someModule.js");
             });
         });
@@ -91,12 +93,22 @@ describe("Testing 'rekuire'",function(){
                 var rekuire = require('rekuire');
                 var error = null;
                 try{
-                    rekuire({localPath:'no-such-package'});
+                    rekuire().path('no-such-package');
                 }catch(e){
                     error = e;
                 }
                 expect(error).not.toBeNull();
             });
+        });
+    });
+
+    describe("when used with proxyrequire", function(){
+        it("should be able rekuires to be replaced", function(){
+            var rek = require('rekuire');
+            var fakeFs = {this_module:"is fake"};
+            var ModuleToBeProxied = proxyquire(rek().path('ModuleToBeProxied'),{fs:fakeFs});
+            var instance = new ModuleToBeProxied();
+            expect(instance.getFs()).toBe(fakeFs);
         });
     });
 });
@@ -106,7 +118,7 @@ describe("Testing 'rekuire'",function(){
 
 // SETUP & TEARDOWN
 
-function copyReqToNodeModules(callback){
+function copyRekToNodeModules(callback){
     fs.mkdirsSync( base + "/node_modules/rekuire/lib");
     fs.copy(base+"lib/", base + "/node_modules/rekuire/lib", function(){
         fs.copy(base+"package.json", base + "node_modules/rekuire/package.json", callback);
