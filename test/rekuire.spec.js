@@ -88,6 +88,15 @@ describe("Testing 'rekuire'",function(){
             });
         });
 
+        it("should return the right path without the use of parentheses", function(){
+            runs(function(){
+                var rek = require('rekuire');
+                var rekPath = rek.path('someModule.js');
+                var localPath = path.relative(__dirname,rekPath);
+                expect(localPath).toBe("testResources/nestedPackage/someModule.js");
+            });
+        });
+
         it("should throw an error if couldn't find", function(){
             runs(function(){
                 var rekuire = require('rekuire');
@@ -100,6 +109,7 @@ describe("Testing 'rekuire'",function(){
                 expect(error).not.toBeNull();
             });
         });
+
     });
 
     describe("when used with proxyrequire", function(){

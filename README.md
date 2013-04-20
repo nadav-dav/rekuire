@@ -21,7 +21,7 @@ so how to use it?
 
 > if you want to resolve only the file location, for example, when you want to use [proxyquire][proxyquire].<br/>
 > use: <br/>
-> ```var mypath = rek().path('MyModule');```<br/>
+> ```var mypath = rek.path('MyModule');```<br/>
 > ```// mypath = 'lib/classes/MyModule.js' ```
 
 - - - 
