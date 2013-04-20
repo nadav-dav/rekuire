@@ -1,6 +1,6 @@
 {
   "name": "rekuire",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "'rekuire' is basically node's 'require' without the relative paths",
   "repository": {
     "type": "git",
