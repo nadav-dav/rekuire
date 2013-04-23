@@ -84,7 +84,7 @@ describe("Testing 'rekuire'",function(){
             runs(function(){
                 var rekuire = require('rekuire');
                 var localPath = path.relative(__dirname,rekuire().path('someModule.js'));
-                expect(localPath).toBe("testResources/nestedPackage/someModule.js");
+                expect(localPath).toEqual(path.normalize("testResources/nestedPackage/someModule.js"));
             });
         });
 
@@ -93,7 +93,15 @@ describe("Testing 'rekuire'",function(){
                 var rek = require('rekuire');
                 var rekPath = rek.path('someModule.js');
                 var localPath = path.relative(__dirname,rekPath);
-                expect(localPath).toBe("testResources/nestedPackage/someModule.js");
+                expect(localPath).toEqual(path.normalize("testResources/nestedPackage/someModule.js"));
+            });
+        });
+        
+        it("should return just the module name if its a global module",function(){
+            runs(function(){
+                var rek = require('rekuire');
+                var rekPath = rek.path('fs-extra');
+                expect(rekPath).toEqual("fs-extra");
             });
         });
 
