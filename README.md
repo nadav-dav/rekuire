@@ -1,5 +1,6 @@
 Rekuire
 =========
+[![NPM version](https://badge.fury.io/js/rekuire.png)](http://badge.fury.io/js/rekuire)
 'rekuire' is basically node's 'require' without the relative paths
 
 installation
