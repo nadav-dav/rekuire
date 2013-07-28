@@ -79,6 +79,21 @@ describe("Testing 'rekuire'",function(){
             });
         })
     });
+
+    describe("when rekuiring a name that matches two files in the system",function(){
+        it("should throw an error", function(){
+            runs(function(){
+                var rekuire = require('rekuire');
+                var error = null;
+                try{
+                    rekuire('SameNamedModule');
+                }catch(e){
+                    error = e;
+                }
+                expect(error).not.toBeNull();
+            });
+        })
+    });
     describe("when rekuiring just the local path", function(){
         it("should return the right path", function(){
             runs(function(){
