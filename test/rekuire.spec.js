@@ -34,6 +34,13 @@ describe("Testing 'rekuire'",function(){
             });
         });
 
+        it("should retrieve it according to the file name (*.json)",function(){
+            runs(function(){
+                var rekuire = require('rekuire');
+                var imported = rekuire('someModule.json');
+                expect(imported).toEqual(jasmine.any(Object));
+            });
+        });
         it("should add '.js' to the module name if not present",function(){
             runs(function(){
                 var rekuire = require('rekuire');
