@@ -55,6 +55,14 @@ describe("Testing 'rekuire'",function(){
             expect(imported).toEqual({"someKey":"someValue"});
         });
 
+        it("should retrieve it according to the file name (*.coffee)",function(){
+            var rek = require('rekuire');
+            var withExt = rek('cup.coffee');
+            var withoutExt = rek('cup');
+            expect(withExt ).toEqual("cup of coffee")
+            expect(withExt ).toEqual(withoutExt );
+        });
+
         it("should get module by name even if extension not present",function(){
             var rek = require('rekuire');
             var jsModule = rek('someModule');
