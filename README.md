@@ -17,17 +17,17 @@ instead of doing this: <br/>
 > ```var MyModule = require('../../../MyModule.js');``` *<-- yuck!*
 
 why not do this:<br/>
-> ```var rek = require('rekuire');```<br/>
-> ```var myModule = rek('MyModule');```
-> ```var myCoffee = rek('MyCoffee.coffee');```
-> ```var myJson = rek('myJson.json');```
+```var rek = require('rekuire');```<br/><br/>
+```var myModule = rek('MyModule');```<br/>
+```var myCoffee = rek('MyCoffee.coffee');```<br/>
+```var myJson = rek('myJson.json');```<br/>
 
 <br/>
 
 if you want to resolve only the file location, for example, when you want to use [proxyquire][proxyquire].<br/>
 use: <br/>
-> ```var mypath = rek.path('MyModule');```<br/>
-> ```// mypath = 'lib/classes/MyModule.js' ```
+```var mypath = rek.path('MyModule');```<br/>
+```// mypath = 'lib/classes/MyModule.js' ```
 
 <br/>
 
