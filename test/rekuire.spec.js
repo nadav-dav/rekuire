@@ -24,53 +24,69 @@ describe("Testing 'rekuire'",function(){
     });
 
 
-
     describe("when running",function(){
         it("should retrieve it according to the file name",function(){
-            var rekuire = require('rekuire');
-            var imported = rekuire('someModule.js');
+            var rek = require('rekuire');
+            var imported = rek('someModule.js');
             expect(imported).toBe("some module");
+        });
+
+        it("should distinct among file type", function(){
+            var rek = require('rekuire');
+            var error;
+            var sameNameJs = rek('sameName.js');
+            var sameNameJson = rek('sameName.json');
+            var sameNameCoffee = rek('sameName.coffee');
+            try{
+                rek('sameName'); // should return ambiguity error
+            }catch(e){
+                error = e;
+            }
+
+            expect(sameNameJs ).toEqual("sameName.js");
+            expect(sameNameCoffee ).toEqual("sameName.coffee");
+            expect(sameNameJson ).toEqual({"name":"same"});
+            expect(error ).not.toBeNull();
         });
 
         it("should retrieve it according to the file name (*.json)",function(){
-            var rekuire = require('rekuire');
-            var imported = rekuire('someJsonObject.json');
-            expect(imported).toEqual({"someKey":"someValue"});
-        });
-        it("should add '.js' to the module name if not present",function(){
-            var rekuire = require('rekuire');
-            var imported = rekuire('someModule');
-            expect(imported).toBe("some module");
-        });
-        it("should fetch the json file when requested even if there is a js file with the same name",function(){
-            var rekuire = require('rekuire');
-            var imported = rekuire('someModule.json');
+            var rek = require('rekuire');
+            var imported = rek('someJsonObject.json');
             expect(imported).toEqual({"someKey":"someValue"});
         });
 
+        it("should get module by name even if extension not present",function(){
+            var rek = require('rekuire');
+            var jsModule = rek('someModule');
+            var jsonObject = rek('someJsonObject');
+
+            expect(jsModule).toBe("some module");
+            expect(jsonObject).toEqual({"someKey":"someValue"});
+        });
+
         it("should retrieve it according to relative path",function(){
-            var rekuire = require('rekuire');
-            var imported = rekuire('./testResources/nestedPackage/someModule.js');
+            var rek = require('rekuire');
+            var imported = rek('./testResources/nestedPackage/someModule.js');
             expect(imported).toBe("some module");
         });
 
         it("should retrieve module from node_modules",function(){
-            var rekuire = require('rekuire');
-            var fse = rekuire('fs-extra');
+            var rek = require('rekuire');
+            var fse = rek('fs-extra');
             expect(fse).not.toBeNull();
         });
 
         it("should retrieved node framework modules",function(){
-            var rekuire = require('rekuire');
-            var fse = rekuire('fs');
+            var rek = require('rekuire');
+            var fse = rek('fs');
             expect(fse).not.toBeNull();
         });
 
         it("should throw an error if not found", function(){
-            var rekuire = require('rekuire');
+            var rek = require('rekuire');
             var error = null;
             try{
-                rekuire('no-such-package');
+                rek('no-such-package');
             }catch(e){
                 error = e;
             }
@@ -80,10 +96,10 @@ describe("Testing 'rekuire'",function(){
 
     describe("when rekuiring a name that matches two files in the system",function(){
         it("should throw an error", function(){
-            var rekuire = require('rekuire');
+            var rek = require('rekuire');
             var error = null;
             try{
-                rekuire('SameNamedModule');
+                rek('SameNamedModule');
             }catch(e){
                 error = e;
             }
@@ -92,8 +108,8 @@ describe("Testing 'rekuire'",function(){
     });
     describe("when rekuiring just the local path", function(){
         it("should return the right path", function(){
-            var rekuire = require('rekuire');
-            var localPath = path.relative(__dirname,rekuire().path('someModule.js'));
+            var rek = require('rekuire');
+            var localPath = path.relative(__dirname,rek().path('someModule.js'));
             expect(localPath).toEqual(path.normalize("testResources/nestedPackage/someModule.js"));
         });
 
@@ -111,10 +127,10 @@ describe("Testing 'rekuire'",function(){
         });
 
         it("should throw an error if couldn't find", function(){
-            var rekuire = require('rekuire');
+            var rek = require('rekuire');
             var error = null;
             try{
-                rekuire().path('no-such-package');
+                rek().path('no-such-package');
             }catch(e){
                 error = e;
             }

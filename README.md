@@ -18,7 +18,11 @@ instead of doing this: <br/>
 
 why not do this:<br/>
 > ```var rek = require('rekuire');```<br/>
-> ```var MyModule = rek('MyModule.js');```
+> ```var myModule = rek('MyModule');```
+> ```var myCoffee = rek('MyCoffee.coffee');```
+> ```var myJson = rek('myJson.json');```
+
+<br/>
 
 if you want to resolve only the file location, for example, when you want to use [proxyquire][proxyquire].<br/>
 use: <br/>
@@ -27,11 +31,29 @@ use: <br/>
 
 <br/>
 
+for more examples, I recommand you to checkout the spec file :)
+
+<br/>
+- - - 
+<br/> 
+
 what is it good for?
 --------------------
 it saves you TONS of time refactoring your code, and making it easily reusable.
 plus, it makes you code more readable = better!
 
+<br/>
+- - - 
+<br/> 
+
+what does it do?
+----------------
+when 'rekuire' is first loaded to the project, it scans the source files locations,
+so when you need them they are right there to use!
+no relative paths are needed! *yeahy!*
+
+<br/>
+- - - 
 <br/>
 
 issues
@@ -42,15 +64,6 @@ if you are having any problems, requests or critisizm, don't hesitate to open an
 - - - 
 <br/> 
 
-what does it do?
-----------------
-when 'rekuire' is first loaded to the project, it scans the **.js* files,
-then, when you need them they are right there to use!
-no relative paths are needed! *yeahy!*
-
-<br/>
-- - - 
-<br/>
 
 
 Development
