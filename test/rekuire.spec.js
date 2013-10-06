@@ -31,6 +31,12 @@ describe("Testing 'rekuire'",function(){
             expect(imported).toBe("some module");
         });
 
+        it("should retrieve it according to the relative path within the project", function(){
+            var rek = require('rekuire');
+            var imported = rek('test/testResources/nestedPackage/someModule.js');
+            expect(imported).toBe("some module");
+        });
+
         it("should distinct among file type", function(){
             var rek = require('rekuire');
             var error;
@@ -114,6 +120,7 @@ describe("Testing 'rekuire'",function(){
             expect(error).not.toBeNull();
         })
     });
+
     describe("when rekuiring just the local path", function(){
         it("should return the right path", function(){
             var rek = require('rekuire');
@@ -154,6 +161,14 @@ describe("Testing 'rekuire'",function(){
             var ModuleToBeProxied = proxyquire(rek().path('ModuleToBeProxied'),{fs:fakeFs});
             var instance = new ModuleToBeProxied();
             expect(instance.getFs()).toBe(fakeFs);
+        });
+    });
+
+    describe("when rekuiring a folder path with index.js in it", function(){
+        it("should return the index file", function(){
+            var rek = require('rekuire');
+            var imported = rek('test/testResources/nestedPackage/folderWithIndex');
+            expect(imported).toBe("index file content");
         });
     });
 });

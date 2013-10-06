@@ -1,26 +1,42 @@
 Rekuire [![NPM version](https://badge.fury.io/js/rekuire.png)](http://badge.fury.io/js/rekuire)
 =========
-'rekuire' is basically node's 'require' without the relative paths
+'rekuire' is basically node's 'require' without the relative paths!
 
-installation
+It saves you TONS of time refactoring your code, and making it easily reusable.
+plus, it makes you code more *readable* = **better!**
+
+Installation
 -------------
 to install, type
 > ```npm install rekuire```
 
 or add it to your ```package.json``` as a dependency.
-
 <br/>
+- - - 
+Whats new?
+----------
+####0.1.3
+> * you can now rekuire file according to the relative path of the file
+> * added support for *index.js* files inside a folder - can be retrieved by the folder path
 
-so how to use it?
+####0.1.2
+> * added support for **.coffee** files and **.json**
+
+- - - 
+
+How to use it?
 -----------------
 instead of doing this: <br/>
 > ```var MyModule = require('../../../MyModule.js');``` *<-- yuck!*
 
 why not do this:<br/>
 ```var rek = require('rekuire');```<br/><br/>
+
+or that:<br/>
 ```var myModule = rek('MyModule');```<br/>
 ```var myCoffee = rek('MyCoffee.coffee');```<br/>
 ```var myJson = rek('myJson.json');```<br/>
+```var myModule = rek('src/api/MyModule');```<br/>
 
 <br/>
 
@@ -32,15 +48,6 @@ use: <br/>
 <br/>
 
 for more examples, I recommand you to checkout the spec file :)
-
-<br/>
-- - - 
-<br/> 
-
-what is it good for?
---------------------
-it saves you TONS of time refactoring your code, and making it easily reusable.
-plus, it makes you code more readable = better!
 
 <br/>
 - - - 
