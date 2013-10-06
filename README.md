@@ -2,6 +2,14 @@ Rekuire [![NPM version](https://badge.fury.io/js/rekuire.png)](http://badge.fury
 =========
 'rekuire' is basically node's 'require' without the relative paths
 
+whats new?
+----------
+0.1.3
+  - you can now rekuire file according to the relative path of the file
+
+- 0.1.2
+  - added support for **.coffee** files and **.json**
+
 installation
 -------------
 to install, type
