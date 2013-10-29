@@ -171,6 +171,18 @@ describe("Testing 'rekuire'",function(){
             expect(imported).toBe("index file content");
         });
     });
+
+    describe("ignoring", function(){
+        it("should be able to ignore folders", function(){
+            var rek = require('rekuire');
+            rek.ignore('test/testResources/out','test/testResources/target')
+            var found = null;
+            try{
+                found = rek('shouldNotFind');
+            }catch(e){}
+            expect(found ).toBeNull();
+        });
+    });
 });
 
 
