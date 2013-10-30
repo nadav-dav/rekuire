@@ -17,10 +17,7 @@ Whats new?
 ----------
 ####0.1.4
 > * added a method to ignore folders while searching the right files (for example, the js files in the server's static folder)
-                                  helpers
-                                  isString.js
-                                  scan.js
-                                  main.js
+
 ####0.1.3
 > * you can now rekuire file according to the relative path of the file
 > * added support for *index.js* files inside a folder - can be retrieved by the folder path
@@ -57,6 +54,7 @@ in order to tell the scanner, not to scan specific folders<br/>
 use: <br/>
 ```
 var mypath = rek.ignore('out', 'target', 'static/js');
+// you should only do it once in your code
 ```
 
 <br/>
