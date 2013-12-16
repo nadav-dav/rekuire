@@ -1,6 +1,11 @@
 var fs = require("fs-extra")
 
 var base = __dirname + "/../../"
+
+exports.createNamePackage = function(){
+    fs.mkdirsSync(base+"/node_modules/name")
+    fs.writeFileSync(base + "node_modules/name/index.js", "module.exports='root';")
+}
 exports.createParentPackage = function () {
 
     // CREATING A PACKAGE
@@ -51,11 +56,15 @@ exports.createChildPackage = function(){
     var indexjs = "" +
         "var rek=require('rekuire');" + "\n" +
         "module.exports.rekuireName = function(){return rek('name');};" + "\n"
+    var packagejson = JSON.stringify({name: 'child-package', main: 'index.js', "dependencies" : { "rekuire" : "*", "name" : "*"}})
     fs.mkdirsSync(base+"node_modules/parent-package/node_modules/child-package/node_modules/name")
     fs.writeFileSync(base + "node_modules/parent-package/node_modules/child-package/index.js", indexjs)
+    fs.writeFileSync(base + "node_modules/parent-package/node_modules/child-package/package.json", packagejson)
 
     // CREATING A SUB PACKAGE FOR THE NAME
     fs.writeFileSync(base + "node_modules/parent-package/node_modules/child-package/node_modules/name/index.js", "module.exports='child-package';")
+    var namepackagejson = JSON.stringify({name: 'name', main: 'index.js'})
+    fs.writeFileSync(base + "node_modules/parent-package/node_modules/child-package/node_modules/name/package.json", namepackagejson)
 
     // CREATING REKUIRE IN IT
     fs.copySync(base + "lib", base + "node_modules/parent-package/node_modules/child-package/node_modules/rekuire/lib/");
@@ -64,4 +73,5 @@ exports.createChildPackage = function(){
 
 exports.cleanTestPackages = function(){
     fs.removeSync(base + "node_modules/parent-package")
+    fs.removeSync(base + "node_modules/name")
 }

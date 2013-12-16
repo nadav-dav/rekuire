@@ -181,10 +181,12 @@ describe("Testing 'rekuire'",function(){
     describe("when two packages are using Rekuire, one is nested inside the other", function(){
         it("should each rekuire modules from the package scope", function(){
             var pc = require("./helpers/package-creator.js")
+            pc.createNamePackage()
             pc.createParentPackage()
             pc.createChildPackage()
             var rek = require('rekuire');
             var parent = rek('parent-package')
+            expect(rek('name')).toEqual("root");
             expect(parent.rekuireName()).toEqual("parent-package");
             expect(parent.childRekuireName()).toEqual("child-package");
             pc.cleanTestPackages();
