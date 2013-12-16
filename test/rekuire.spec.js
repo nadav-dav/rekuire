@@ -10,13 +10,7 @@ var base = __dirname + "/../";
 describe("Testing 'rekuire'",function(){
 
     beforeEach(function(){
-        var setupDone = false;
-        runs( function () {
-            copyRekToNodeModules(function(){
-                setupDone = true;
-            });
-        });
-        waitsFor(function () { return !!setupDone; } , 'Timed out', 100);
+        copyRekToNodeModules();
     });
 
     afterEach(function(){
@@ -183,6 +177,19 @@ describe("Testing 'rekuire'",function(){
             expect(found ).toBeNull();
         });
     });
+
+    describe("when two packages are using Rekuire, one is nested inside the other", function(){
+        it("should each rekuire modules from the package scope", function(){
+            var pc = require("./helpers/package-creator.js")
+            pc.createParentPackage()
+            pc.createChildPackage()
+            var rek = require('rekuire');
+            var parent = rek('parent-package')
+            expect(parent.rekuireName()).toEqual("parent-package");
+            expect(parent.childRekuireName()).toEqual("child-package");
+            pc.cleanTestPackages();
+        })
+    })
 });
 
 
@@ -190,11 +197,10 @@ describe("Testing 'rekuire'",function(){
 
 // SETUP & TEARDOWN
 
-function copyRekToNodeModules(callback){
+function copyRekToNodeModules(){
     fs.mkdirsSync( base + "/node_modules/rekuire/lib");
-    fs.copy(base+"lib/", base + "/node_modules/rekuire/lib", function(){
-        fs.copy(base+"package.json", base + "node_modules/rekuire/package.json", callback);
-    });
+    fs.copySync(base+"lib/", base + "/node_modules/rekuire/lib")
+    fs.copySync(base+"package.json", base + "node_modules/rekuire/package.json");
 }
 
 function clearNodeModules(){
