@@ -15,6 +15,9 @@ or add it to your ```package.json``` as a dependency.
 - - - 
 Whats new?
 ----------
+####0.1.5
+> * added support for nested project dependencies.  (They previously weren't supported since node_modules was ignored)
+
 ####0.1.4
 > * added a method to ignore folders while searching the right files (for example, the js files in the server's static folder)
 
@@ -80,6 +83,28 @@ what does it do?
 when 'rekuire' is first loaded to the project, it scans the source files locations,
 so when you need them they are right there to use!
 no relative paths are needed! *yeahy!*
+
+<br/>
+- - - 
+<br/>
+
+how to handle nested project dependencies?
+----------------
+
+When you've got a project and a dependency that both use `rekuire`.  Like so:
+
+    # npm list
+    # parent application
+    # +-- rekuire@0.1.4
+    # ¦ +-- underscore@1.5.2
+    # +-- nested project
+    #   +-- rekuire@0.1.4
+    #     +-- underscore@1.5.2
+
+You need to specify additional search directories in the dependency.  Somewhere in the dependency, (the `index.js` file maybe) add the following line:
+
+    var rek = require('rekuire');
+    rek.addSearchDirectory( __dirname );
 
 <br/>
 - - - 
