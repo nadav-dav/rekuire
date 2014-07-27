@@ -16,7 +16,7 @@ or add it to your ```package.json``` as a dependency.
 Whats new?
 ----------
 ####0.1.5
-> * fixed a bug that causes failures when scanning a package with higher os privileges (thanks [Danny][danny]!)
+> * fixed a bug that causes failures when scanning a package with higher os privileges (thanks [Dany][dany]!)
 
 ####0.1.4
 > * added a method to ignore folders while searching the right files (for example, the js files in the server's static folder)
@@ -105,4 +105,4 @@ To test, run: ```npm test```
 
 [proxyquire]:https://github.com/thlorenz/proxyquire
 [issue]:https://github.com/nadav-dav/rekuire/issues
-[danny]:https://github.com/danyshaanan
+[dany]:https://github.com/danyshaanan
