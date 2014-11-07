@@ -112,7 +112,19 @@ describe("Testing 'rekuire'",function(){
                 error = e;
             }
             expect(error).not.toBeNull();
-        })
+        });
+
+        it("should specify the conflictions", function(){
+            var rek = require('rekuire');
+            var error = null;
+            try{
+                rek('SameNamedModule');
+            }catch(e){
+                error = e;
+            }
+            expect(error.message).toContain("test/testResources/nestedPackage/folder1/SameNamedModule.js");
+            expect(error.message).toContain("test/testResources/nestedPackage/folder2/SameNamedModule.js");
+        });
     });
 
     describe("when rekuiring just the local path", function(){
