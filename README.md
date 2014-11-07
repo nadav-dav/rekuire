@@ -15,18 +15,21 @@ or add it to your ```package.json``` as a dependency.
 - - - 
 Whats new?
 ----------
+####0.1.6
+> * Added colliding files paths to Ambiguity Error
+
 ####0.1.5
-> * fixed a bug that causes failures when scanning a package with higher os privileges (thanks [Dany][dany]!)
+> * Fixed a bug that causes failures when scanning a package with higher os privileges (thanks [Dany][dany]!)
 
 ####0.1.4
-> * added a method to ignore folders while searching the right files (for example, the js files in the server's static folder)
+> * Added a method to ignore folders while searching the right files (for example, the js files in the server's static folder)
 
 ####0.1.3
 > * you can now rekuire file according to the relative path of the file
-> * added support for *index.js* files inside a folder - can be retrieved by the folder path
+> * Added support for *index.js* files inside a folder - can be retrieved by the folder path
 
 ####0.1.2
-> * added support for **.coffee** files and **.json**
+> * Added support for **.coffee** files and **.json**
 
 - - - 
 
