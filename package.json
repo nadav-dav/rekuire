@@ -29,5 +29,8 @@
     "name":"Nadav Dav",
     "email": "nadavik@gmail.com"
   },
+  "rekuire": {
+    "ignore": ["test/testResources/ignored-by-package-json"]
+  },
   "license": "BSD"
 }

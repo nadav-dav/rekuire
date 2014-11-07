@@ -181,13 +181,23 @@ describe("Testing 'rekuire'",function(){
     describe("ignoring", function(){
         it("should be able to ignore folders", function(){
             var rek = require('rekuire');
-            rek.ignore('test/testResources/out','test/testResources/target')
+            rek.ignore('test/testResources/ignored-by-code','test/testResources/target')
             var found = null;
             try{
                 found = rek('shouldNotFind');
             }catch(e){}
             expect(found ).toBeNull();
         });
+        it("should be able to ignore folder specified in the package file", function(){
+            var rek = require('rekuire');
+            var found = null;
+            // shouldNotFind2 is located inside "ignored-by-package-json" folder
+            // that has been added to the ignore list in `package.json`
+            try{
+                found = rek('shouldNotFind2');
+            }catch(e){}
+            expect(found ).toBeNull(); 
+        })
     });
 
     describe("when two packages are using Rekuire, one is nested inside the other", function(){

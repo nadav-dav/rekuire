@@ -1,0 +1,1 @@
+module.exports =new Error('This should not be found by the scanner!');

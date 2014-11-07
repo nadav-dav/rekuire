@@ -15,6 +15,9 @@ or add it to your ```package.json``` as a dependency.
 - - - 
 Whats new?
 ----------
+####0.1.7
+> * Now you are able to describe ignored folders in your project inside the `package.json` file!
+
 ####0.1.6
 > * Added colliding files paths to Ambiguity Error
 
@@ -56,12 +59,23 @@ var myModule = rek('src/api/MyModule');
 <br/>
 
 
-in order to tell the scanner, not to scan specific folders<br/>
-use: <br/>
+in order to tell the scanner, not to scan specific folders you can configure `rekuire` not to scan folders right from the `package.json` file:
+
+```
+...
+"rekuire": {
+	"ignore": ["out", "dist/target", "client/app"]
+}
+...
+
+```
+
+or you can set it up by code: <br/>
 ```
 var mypath = rek.ignore('out', 'target', 'static/js');
 // you should only do it once in your code
 ```
+
 
 <br/>
 
