@@ -3,7 +3,6 @@
 var fs = require('fs-extra'),
     path = require('path'),
     proxyquire = require('proxyquire');
-
 var base = __dirname + "/../";
 
 
@@ -14,7 +13,7 @@ describe("Testing 'rekuire'",function(){
     });
 
     afterEach(function(){
-        clearNodeModules();
+        clearRekuireFromNodeModules();
     });
 
 
@@ -128,13 +127,8 @@ describe("Testing 'rekuire'",function(){
     });
 
     describe("when rekuiring just the local path", function(){
-        it("should return the right path", function(){
-            var rek = require('rekuire');
-            var localPath = path.relative(__dirname,rek().path('someModule.js'));
-            expect(localPath).toEqual(path.normalize("testResources/nestedPackage/someModule.js"));
-        });
 
-        it("should return the right path without the use of parentheses", function(){
+        it("should return the right path", function(){
             var rek = require('rekuire');
             var rekPath = rek.path('someModule.js');
             var localPath = path.relative(__dirname,rekPath);
@@ -164,7 +158,7 @@ describe("Testing 'rekuire'",function(){
         it("should be able rekuires to be replaced", function(){
             var rek = require('rekuire');
             var fakeFs = {this_module:"is fake"};
-            var ModuleToBeProxied = proxyquire(rek().path('ModuleToBeProxied'),{fs:fakeFs});
+            var ModuleToBeProxied = proxyquire(rek.path('ModuleToBeProxied'),{fs:fakeFs});
             var instance = new ModuleToBeProxied();
             expect(instance.getFs()).toBe(fakeFs);
         });
@@ -201,16 +195,6 @@ describe("Testing 'rekuire'",function(){
             }
         });
     });
-    
-    function file(location){
-        return path.resolve(base + location);
-    }
-
-    process.on('uncaughtException', function (err) {
-      console.error((new Date).toUTCString() + ' uncaughtException:', err.message)
-      console.error(err.stack)
-      process.exit(1)
-    })
 
     describe("ignoring", function(){
         it("should be able to ignore folders", function(){
@@ -262,20 +246,28 @@ describe("Testing 'rekuire'",function(){
                 copyRekToNodeModules(file('/node_modules/parent-package/node_modules'));
             }
         })
-    })
+    });
+
 });
 
 
 
-
-// SETUP & TEARDOWN
-
-function copyRekToNodeModules(node_modules){
-    fs.mkdirsSync( node_modules+"/rekuire/lib");
-    fs.copySync(base+"lib/", node_modules+"/rekuire/lib")
-    fs.copySync(base+"package.json", node_modules+"/rekuire/package.json");
+/*
+ **********************
+ UTILS
+ **********************
+ */
+function file(location){
+    return path.resolve(base + location);
 }
 
-function clearNodeModules(){
-    fs.removeSync( base + "node_modules/rekuire");
+// SETUP & TEARDOWN
+function copyRekToNodeModules(node_modules){
+    fs.mkdirsSync( node_modules+"/rekuire/lib");
+    fs.copySync(file("lib/"), node_modules+"/rekuire/lib")
+    fs.copySync(file("package.json"), node_modules+"/rekuire/package.json");
+}
+
+function clearRekuireFromNodeModules(){
+    fs.removeSync(file("node_modules/rekuire"));
 }
