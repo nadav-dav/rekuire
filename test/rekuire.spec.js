@@ -236,9 +236,8 @@ describe("Testing 'rekuire'",function(){
 
     describe("when two packages are using Rekuire, one is nested inside the other", function(){
         it("should each rekuire modules from the package scope", function(){
+            createNamePackage();
             createPackageWithNestedPackage();
-            fs.copySync(file('/test/testResources/nested-modules-example/name'), path.resolve(base + '/node_modules/name'));
-            copyRekToNodeModules(file('/node_modules/parent-package/node_modules'));
             var rek = require('rekuire');
             var pkgWithChild = rek('parent-package');
             expect(rekuireName()).toEqual("root");
@@ -247,18 +246,20 @@ describe("Testing 'rekuire'",function(){
             cleanUp();
 
 
+            function createNamePackage(){
+                fs.copySync(file('/test/testResources/nested-modules-example/name'), path.resolve(base + '/node_modules/name'));
+            }
             function rekuireName(){
                 return rek('name');
             }
-
             function cleanUp(){
                 fs.removeSync(path.resolve(path.resolve(base + '/node_modules/name')));
                 fs.removeSync(path.resolve(path.resolve(base + '/node_modules/parent-package')));
             }
-
             function createPackageWithNestedPackage(){
                 fs.copySync(file('/test/testResources/nested-modules-example/parent-package'), file('/node_modules/parent-package'));
                 copyRekToNodeModules(file('/node_modules/parent-package/node_modules/child-package/node_modules'));
+                copyRekToNodeModules(file('/node_modules/parent-package/node_modules'));
             }
         })
     })
