@@ -8,29 +8,31 @@
   },
   "main": "./lib/main.js",
   "scripts": {
-    "test": "npm install && jasmine-node ./test/"
+    "test": "npm install && ./node_modules/.bin/jasmine-node ./test/"
   },
-  "dependencies" : {
-      "underscore" : "*"
+  "dependencies": {
+    "underscore": "^1.7.0"
   },
-  "devDependencies" : {
-      "fs-extra" : "*",
-      "jasmine-node" : "*",
-      "proxyquire" : "*"
+  "devDependencies": {
+    "fs-extra": "^0.12.0",
+    "jasmine-node": "^1.14.5",
+    "proxyquire": "^1.1.0"
   },
   "keywords": [
     "require",
-    "rekuire ",
+    "rekuire",
     "relative",
     "path",
     "node"
   ],
   "author": {
-    "name":"Nadav Dav",
+    "name": "Nadav Dav",
     "email": "nadavik@gmail.com"
   },
   "rekuire": {
-    "ignore": ["test/testResources/ignored-by-package-json"]
+    "ignore": [
+      "test/testResources/ignored-by-package-json"
+    ]
   },
   "license": "BSD"
 }

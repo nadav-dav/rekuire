@@ -10,7 +10,7 @@ var base = __dirname + "/../";
 describe("Testing 'rekuire'",function(){
 
     beforeEach(function(){
-        copyRekToNodeModules();
+        copyRekToNodeModules(file('node_modules'));
     });
 
     afterEach(function(){
@@ -178,6 +178,40 @@ describe("Testing 'rekuire'",function(){
         });
     });
 
+    describe('when node_modules is a symlink to other folder', function() {
+        it('should return the right module, even from rekuire is brought via a symlink', function (done) {
+            try {
+                createPackageThatItsNodeModulesFolderIsSymlink()
+                var packageWithSymlink = require('package-with-symlink-example');
+                expect(packageWithSymlink.getInnerModule()).toEqual('success');    
+                done();
+            } finally {
+                cleanUp();
+            }
+
+            function createPackageThatItsNodeModulesFolderIsSymlink(){
+                fs.copySync     (file('/test/testResources/package-with-symlink-example/package'), file('/node_modules/package-with-symlink-example'));
+                copyRekToNodeModules(file('/test/testResources/package-with-symlink-example/node_modules'));
+                fs.symlinkSync  (file('/test/testResources/package-with-symlink-example/node_modules'), file('node_modules/package-with-symlink-example/node_modules'));     
+            }
+
+            function cleanUp (){
+                fs.removeSync(file('/node_modules/package-with-symlink-example'));
+                fs.removeSync(file('/test/testResources/package-with-symlink-example/node_modules/rekuire'));
+            }
+        });
+    });
+    
+    function file(location){
+        return path.resolve(base + location);
+    }
+
+    process.on('uncaughtException', function (err) {
+      console.error((new Date).toUTCString() + ' uncaughtException:', err.message)
+      console.error(err.stack)
+      process.exit(1)
+    })
+
     describe("ignoring", function(){
         it("should be able to ignore folders", function(){
             var rek = require('rekuire');
@@ -202,16 +236,30 @@ describe("Testing 'rekuire'",function(){
 
     describe("when two packages are using Rekuire, one is nested inside the other", function(){
         it("should each rekuire modules from the package scope", function(){
-            var pc = require("./helpers/package-creator.js")
-            pc.createNamePackage()
-            pc.createParentPackage()
-            pc.createChildPackage()
+            createPackageWithNestedPackage();
+            fs.copySync(file('/test/testResources/nested-modules-example/name'), path.resolve(base + '/node_modules/name'));
+            copyRekToNodeModules(file('/node_modules/parent-package/node_modules'));
             var rek = require('rekuire');
-            var parent = rek('parent-package')
-            expect(rek('name')).toEqual("root");
-            expect(parent.rekuireName()).toEqual("parent-package");
-            expect(parent.childRekuireName()).toEqual("child-package");
-            pc.cleanTestPackages();
+            var pkgWithChild = rek('parent-package');
+            expect(rekuireName()).toEqual("root");
+            expect(pkgWithChild.rekuireName()).toEqual("parent-package");
+            expect(pkgWithChild.rekuireChild().rekuireName()).toEqual("child-package");
+            cleanUp();
+
+
+            function rekuireName(){
+                return rek('name');
+            }
+
+            function cleanUp(){
+                fs.removeSync(path.resolve(path.resolve(base + '/node_modules/name')));
+                fs.removeSync(path.resolve(path.resolve(base + '/node_modules/parent-package')));
+            }
+
+            function createPackageWithNestedPackage(){
+                fs.copySync(file('/test/testResources/nested-modules-example/parent-package'), file('/node_modules/parent-package'));
+                copyRekToNodeModules(file('/node_modules/parent-package/node_modules/child-package/node_modules'));
+            }
         })
     })
 });
@@ -221,10 +269,10 @@ describe("Testing 'rekuire'",function(){
 
 // SETUP & TEARDOWN
 
-function copyRekToNodeModules(){
-    fs.mkdirsSync( base + "/node_modules/rekuire/lib");
-    fs.copySync(base+"lib/", base + "/node_modules/rekuire/lib")
-    fs.copySync(base+"package.json", base + "node_modules/rekuire/package.json");
+function copyRekToNodeModules(node_modules){
+    fs.mkdirsSync( node_modules+"/rekuire/lib");
+    fs.copySync(base+"lib/", node_modules+"/rekuire/lib")
+    fs.copySync(base+"package.json", node_modules+"/rekuire/package.json");
 }
 
 function clearNodeModules(){
