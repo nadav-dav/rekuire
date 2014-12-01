@@ -15,24 +15,13 @@ or add it to your ```package.json``` as a dependency.
 - - - 
 Whats new?
 ----------
+####0.1.8
+> * Removed deprecated code - `rek().path(...)` will not work anymore, instead use `rek.path(...)`.
+> * Fixed an issue of causing `rekuire` not to scan the folders correctly when `node_modules` was a symlink.
+> * Added .npmignore to the package - so you won't get the test files when adding dependencies
+
 ####0.1.7
 > * Now you are able to describe ignored folders in your project inside the `package.json` file!
-
-####0.1.6
-> * Added colliding files paths to Ambiguity Error
-
-####0.1.5
-> * Fixed a bug that causes failures when scanning a package with higher os privileges (thanks [Dany][dany]!)
-
-####0.1.4
-> * Added a method to ignore folders while searching the right files (for example, the js files in the server's static folder)
-
-####0.1.3
-> * you can now rekuire file according to the relative path of the file
-> * Added support for *index.js* files inside a folder - can be retrieved by the folder path
-
-####0.1.2
-> * Added support for **.coffee** files and **.json**
 
 - - - 
 
@@ -56,7 +45,12 @@ var myModule = rek('src/api/MyModule');
 ```
 <br/>
 
-<br/>
+
+what does it do?
+----------------
+when 'rekuire' is first loaded to the project, it scans the source files locations,
+so when you need them they are right there to use!
+no relative paths are needed! *yeahy!*
 
 
 in order to tell the scanner, not to scan specific folders you can configure `rekuire` not to scan folders right from the `package.json` file:
@@ -95,15 +89,28 @@ for more examples, I recommend you to checkout the spec file :)
 - - - 
 <br/> 
 
-what does it do?
-----------------
-when 'rekuire' is first loaded to the project, it scans the source files locations,
-so when you need them they are right there to use!
-no relative paths are needed! *yeahy!*
+change log
+----------
+####0.1.6
+> * Added colliding files paths to Ambiguity Error
+
+####0.1.5
+> * Fixed a bug that causes failures when scanning a package with higher os privileges (thanks [Dany][dany]!)
+
+####0.1.4
+> * Added a method to ignore folders while searching the right files (for example, the js files in the server's static folder)
+
+####0.1.3
+> * you can now rekuire file according to the relative path of the file
+> * Added support for *index.js* files inside a folder - can be retrieved by the folder path
+
+####0.1.2
+> * Added support for **.coffee** files and **.json**
 
 <br/>
-- - - 
+- - -
 <br/>
+
 
 issues
 -------
