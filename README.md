@@ -10,19 +10,6 @@ Installation
 to install, type
 > ```npm install rekuire```
 
-or add it to your ```package.json``` as a dependency.
-<br/>
-- - - 
-Whats new?
-----------
-####0.1.8
-> * Removed deprecated code - `rek().path(...)` will not work anymore, instead use `rek.path(...)`.
-> * Fixed an issue of causing `rekuire` not to scan the folders correctly when `node_modules` was a symlink.
-> * Added .npmignore to the package - so you won't get the test files when adding dependencies
-
-####0.1.7
-> * Now you are able to describe ignored folders in your project inside the `package.json` file!
-
 - - - 
 
 How to use it?
@@ -30,7 +17,7 @@ How to use it?
 instead of doing this: <br/>
 > ```var MyModule = require('../../../MyModule.js');``` *<-- yuck!*
 
-why not do this:<br/>
+you can now do this:<br/>
 ```
 var rek = require('rekuire');
 var myModule = rek('MyModule');
@@ -45,13 +32,25 @@ var myModule = rek('src/api/MyModule');
 ```
 <br/>
 
+Whats new?
+----------
+####0.1.9
+> * Fixed a bug causing the scanner to fail, if the fetched file was named like a default method like 'toString'
 
-what does it do?
-----------------
-when 'rekuire' is first loaded to the project, it scans the source files locations,
-so when you need them they are right there to use!
+####0.1.8
+> * Removed deprecated code - `rek().path(...)` will not work anymore, instead use `rek.path(...)`.
+> * Fixed an issue of causing `rekuire` not to scan the folders correctly when `node_modules` was a symlink.
+> * Added .npmignore to the package - so you won't get the test files when adding dependencies
+
+####0.1.7
+> * Now you are able to describe ignored folders in your project inside the `package.json` file!
+
+
+How does it work?
+------------------
+when 'rekuire' is first loaded into the project, it scans the source files locations, and stores them.
+so when you need them they are right there ready to use!
 no relative paths are needed! *yeahy!*
-
 
 in order to tell the scanner, not to scan specific folders you can configure `rekuire` not to scan folders right from the `package.json` file:
 

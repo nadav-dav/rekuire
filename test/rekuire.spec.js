@@ -99,6 +99,12 @@ describe("Testing 'rekuire'",function(){
             }
             expect(error).not.toBeNull();
         })
+
+        it("should be able to retrieve files named like a default method", function(){
+            var rek = require('rekuire');
+            expect(rek('toString')).toEqual('toString');
+            expect(rek('prototype')).toEqual('prototype');
+        });
     });
 
     describe("when rekuiring a name that matches two files in the system",function(){
