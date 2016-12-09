@@ -5,12 +5,14 @@ Rekuire [![NPM version](https://badge.fury.io/js/rekuire.png)](http://badge.fury
 It saves you TONS of time refactoring your code, and making it easily reusable.
 plus, it makes you code more *readable* = **better!**
 
+**This fork is compatible with `create-react-app` and Jest.**
+
 Installation
 -------------
 to install, type
 > ```npm install rekuire```
 
-- - - 
+- - -
 
 How to use it?
 -----------------
@@ -77,7 +79,7 @@ if you want to resolve only the file location, for example, when you want to use
 use: <br/>
 ```
 var mypath = rek.path('MyModule');
-// mypath = 'lib/classes/MyModule.js' 
+// mypath = 'lib/classes/MyModule.js'
 ```
 
 <br/>
@@ -85,8 +87,8 @@ var mypath = rek.path('MyModule');
 for more examples, I recommend you to checkout the spec file :)
 
 <br/>
-- - - 
-<br/> 
+- - -
+<br/>
 
 change log
 ----------
@@ -116,8 +118,8 @@ issues
 if you are having any problems, requests or criticism, don't hesitate to open an [issue, here][issue]
 
 <br/>
-- - - 
-<br/> 
+- - -
+<br/>
 
 
 
