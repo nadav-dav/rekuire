@@ -11,7 +11,7 @@
     "test": "npm install && ./node_modules/.bin/jasmine-node ./test/"
   },
   "dependencies": {
-    "underscore": "^1.7.0"
+    "lodash.find": "^4.6.0"
   },
   "devDependencies": {
     "fs-extra": "^0.12.0",
